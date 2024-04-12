@@ -53,7 +53,7 @@ class MainActivity : ComponentActivity() {
 }
 
 @Composable
-@Preview(device = Devices.PIXEL_4_XL)
+@Preview(device = Devices.PIXEL_2)
 fun Greeting() {
     Column(
         modifier = Modifier
@@ -250,7 +250,8 @@ fun Greeting() {
                 contentDescription = "movies",
                 modifier = Modifier
                     .padding(start = 20.dp, end = 20.dp)
-                    .fillMaxWidth()
+                    .fillMaxWidth(),
+                contentScale = ContentScale.FillWidth
             )
         }
         Row(

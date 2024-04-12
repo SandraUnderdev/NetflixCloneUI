@@ -7,6 +7,7 @@ import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.BoxWithConstraints
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxHeight
@@ -15,6 +16,8 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
@@ -25,6 +28,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.tooling.preview.Devices
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -49,14 +53,19 @@ class MainActivity : ComponentActivity() {
 }
 
 @Composable
-@Preview
+@Preview(device = Devices.PIXEL_4_XL)
 fun Greeting() {
-    Box(
+    Column(
         modifier = Modifier
             .fillMaxSize()
-            .background(Color.Black),
+            .background(color = Color.Black)
     ) {
-        Column() {
+        Column(
+            modifier = Modifier
+                .weight(0.1f)
+                .verticalScroll(rememberScrollState())
+                .padding(bottom = 12.dp)
+        ) {
             Row {
                 Image(
                     painter = painterResource(id = R.drawable.netflix),
@@ -137,9 +146,11 @@ fun Greeting() {
                 )
             }
 
-            Row( modifier = Modifier
-                .fillMaxWidth(),
-                horizontalArrangement = Arrangement.SpaceEvenly) {
+            Row(
+                modifier = Modifier
+                    .fillMaxWidth(),
+                horizontalArrangement = Arrangement.SpaceEvenly
+            ) {
 
                 Text(
                     modifier = Modifier
@@ -176,9 +187,11 @@ fun Greeting() {
 
             }
 
-            Row(  modifier = Modifier
-                .fillMaxWidth(),
-                horizontalArrangement = Arrangement.SpaceEvenly) {
+            Row(
+                modifier = Modifier
+                    .fillMaxWidth(),
+                horizontalArrangement = Arrangement.SpaceEvenly
+            ) {
                 Column() {
                     Image(
                         painter = painterResource(id = R.drawable.add),
@@ -215,7 +228,7 @@ fun Greeting() {
                     )
                     Text(
                         modifier = Modifier
-                            .padding(start = 12.dp, top =  6.dp),
+                            .padding(start = 12.dp, top = 6.dp),
                         text = "info",
                         color = Color.Gray,
                         fontSize = 13.sp
@@ -239,83 +252,88 @@ fun Greeting() {
                     .padding(start = 20.dp, end = 20.dp)
                     .fillMaxWidth()
             )
-
-            Row(  modifier = Modifier
-                .fillMaxWidth(),
-                horizontalArrangement = Arrangement.SpaceAround)
-            {
-                Column() {
-                    Image(
-                        painter = painterResource(id = R.drawable.home),
-                        contentDescription = "home",
-                        modifier = Modifier
-                            .width(50.dp)
-                            .height(50.dp)
-                            .padding(top = 22.dp)
-                    )
-                    Text(
-                        modifier = Modifier
-                            .padding(start = 8.dp, top =  6.dp),
-                        text = "Home",
-                        color = Color.White,
-                        fontSize = 13.sp
-                    )
-                }
-                Column() {
-                    Image(
-                        painter = painterResource(id = R.drawable.news),
-                        contentDescription = "new",
-                        modifier = Modifier
-                            .width(50.dp)
-                            .height(50.dp)
-                            .padding(start = 10.dp, top = 22.dp)
-                    )
-                    Text(
-                        modifier = Modifier
-                            .padding(start = 2.dp, top =  6.dp),
-                        text = "New & Hot",
-                        color = Color.Gray,
-                        fontSize = 13.sp
-                    )
-                }
-                Column() {
-                    Image(
-                        painter = painterResource(id = R.drawable.video_game),
-                        contentDescription = "games",
-                        modifier = Modifier
-                            .width(70.dp)
-                            .height(50.dp)
-                            .padding(top = 22.dp)
-                    )
-                    Text(
-                        modifier = Modifier
-                            .padding(start = 16.dp, top =  6.dp),
-                        text = "Games",
-                        color = Color.Gray,
-                        fontSize = 13.sp
-                    )
-                }
-                Column() {
-                    Image(
-                        painter = painterResource(id = R.drawable.download),
-                        contentDescription = "downloads",
-                        modifier = Modifier
-                            .width(70.dp)
-                            .height(50.dp)
-                            .padding(top = 22.dp)
-                    )
-                    Text(
-                        modifier = Modifier
-                            .padding(start = 10.dp, top =  6.dp),
-                        text = "Downloads",
-                        color = Color.Gray,
-                        fontSize = 13.sp
-                    )
-                }
-            }
-
         }
-
+        Row(
+            modifier = Modifier
+                .fillMaxWidth()
+                .background(color = Color.White.copy(alpha = 0.15f))
+                .padding(vertical = 12.dp),
+            horizontalArrangement = Arrangement.SpaceAround,
+            verticalAlignment = Alignment.CenterVertically
+        ) {
+            Column(
+                verticalArrangement = Arrangement.Center,
+                horizontalAlignment = Alignment.CenterHorizontally
+            ) {
+                Image(
+                    painter = painterResource(id = R.drawable.home),
+                    contentDescription = "home",
+                    contentScale = ContentScale.FillHeight,
+                    modifier = Modifier
+                        .width(20.dp)
+                        .height(20.dp)
+                )
+                Text(
+                    text = "Home",
+                    color = Color.White,
+                    fontSize = 13.sp
+                )
+            }
+            Column(
+                verticalArrangement = Arrangement.Center,
+                horizontalAlignment = Alignment.CenterHorizontally
+            ) {
+                Image(
+                    painter = painterResource(id = R.drawable.news),
+                    contentDescription = "new",
+                    contentScale = ContentScale.FillHeight,
+                    modifier = Modifier
+                        .width(20.dp)
+                        .height(20.dp)
+                )
+                Text(
+                    text = "New & Hot",
+                    color = Color.Gray,
+                    fontSize = 13.sp
+                )
+            }
+            Column(
+                verticalArrangement = Arrangement.Center,
+                horizontalAlignment = Alignment.CenterHorizontally
+            ) {
+                Image(
+                    painter = painterResource(id = R.drawable.video_game),
+                    contentDescription = "games",
+                    contentScale = ContentScale.FillHeight,
+                    modifier = Modifier
+                        .width(20.dp)
+                        .height(20.dp)
+                )
+                Text(
+                    text = "Games",
+                    color = Color.Gray,
+                    fontSize = 13.sp
+                )
+            }
+            Column(
+                verticalArrangement = Arrangement.Center,
+                horizontalAlignment = Alignment.CenterHorizontally
+            ) {
+                Image(
+                    painter = painterResource(id = R.drawable.download),
+                    contentDescription = "downloads",
+                    contentScale = ContentScale.FillHeight,
+                    modifier = Modifier
+                        .width(20.dp)
+                        .height(20.dp)
+                )
+                Text(
+                    text = "Downloads",
+                    color = Color.Gray,
+                    fontSize = 13.sp
+                )
+            }
+        }
     }
 }
 
